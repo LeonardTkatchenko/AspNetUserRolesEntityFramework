@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AspNetUserRolesEntityFramework.Data;
 using AspNetUserRolesEntityFramework.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetUserRolesEntityFramework.Controllers
 {
@@ -20,6 +21,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         }
 
         // GET: DiscussionForums
+        [Authorize(Roles ="Manager, RegisteredUser")] //Wk10Lab7
         public async Task<IActionResult> Index()
         {
             return View(await _context.DiscussionForum.ToListAsync());
@@ -54,6 +56,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager, RegisteredUser")] //Wk10Lab7
         public async Task<IActionResult> Create([Bind("Id,PostDate,UserName,TopicTitle,MessageContent")] DiscussionForum discussionForum)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         }
 
         // GET: DiscussionForums/Edit/5
+        [Authorize(Roles = "Manager")] //Wk10Lab7
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")] //Wk10Lab7
         public async Task<IActionResult> Edit(int id, [Bind("Id,PostDate,UserName,TopicTitle,MessageContent")] DiscussionForum discussionForum)
         {
             if (id != discussionForum.Id)
@@ -117,6 +122,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         }
 
         // GET: DiscussionForums/Delete/5
+        [Authorize(Roles = "Manager")] //Wk10Lab7
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +143,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         // POST: DiscussionForums/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Manager")] //Wk10Lab7
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var discussionForum = await _context.DiscussionForum.FindAsync(id);
