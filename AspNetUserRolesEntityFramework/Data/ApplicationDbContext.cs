@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AspNetUserRolesEntityFramework.Models;
 
 namespace AspNetUserRolesEntityFramework.Data
 {
@@ -12,5 +13,6 @@ namespace AspNetUserRolesEntityFramework.Data
             : base(options)
         {
         }
+        public DbSet<AspNetUserRolesEntityFramework.Models.DiscussionForum> DiscussionForum { get; set; }
     }
 }
