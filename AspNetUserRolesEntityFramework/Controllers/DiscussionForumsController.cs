@@ -46,6 +46,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         }
 
         // GET: DiscussionForums/Create
+        [Authorize(Roles = "Manager, RegisteredUser")] //Wk10Lab7
         public IActionResult Create()
         {
             return View();
