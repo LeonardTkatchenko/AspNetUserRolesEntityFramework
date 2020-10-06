@@ -49,7 +49,12 @@ namespace AspNetUserRolesEntityFramework.Controllers
         [Authorize(Roles = "Manager, RegisteredUser")] //Wk10Lab7
         public IActionResult Create()
         {
-            return View();
+            DiscussionForum forum = new DiscussionForum
+            {
+                PostDate = DateTime.Now //Wk10Lab7 Q2 - Overwrite date value
+            };
+
+            return View(forum);
         }
 
         // POST: DiscussionForums/Create
