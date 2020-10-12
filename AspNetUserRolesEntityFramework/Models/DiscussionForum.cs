@@ -24,5 +24,7 @@ namespace AspNetUserRolesEntityFramework.Models
         [Required]
         [Display(Name = "Message Content")]
         public string MessageContent { get; set; }
+
+        public int Like { get; set; }
     }
 }

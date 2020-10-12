@@ -30,6 +30,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.MessageContent)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Like)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -50,16 +53,19 @@
                 @Html.DisplayFor(modelItem => item.MessageContent)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Like)
+            </td>
+            <td>
                 @if (User.IsInRole("Manager"))
                 {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> <span> | </span>
                 }
-                |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> <span> | </span>
                 @if (User.IsInRole("Manager"))
                 {
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> <span> | </span>
                 }
+                <a asp-action="IncreaseLike" asp-route-id="@item.Id">Like</a>
             </td>
 
         </tr>

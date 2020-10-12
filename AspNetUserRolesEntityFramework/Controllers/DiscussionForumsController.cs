@@ -162,5 +162,44 @@ namespace AspNetUserRolesEntityFramework.Controllers
         {
             return _context.DiscussionForum.Any(e => e.Id == id);
         }
+
+        //Week11Lab8
+        public async Task<IActionResult> IncreaseLike(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var discussionForum = await _context.DiscussionForum.FindAsync(id);
+            if (discussionForum == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    discussionForum.Like++;
+
+                    _context.Update(discussionForum);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!DiscussionForumExists(discussionForum.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
