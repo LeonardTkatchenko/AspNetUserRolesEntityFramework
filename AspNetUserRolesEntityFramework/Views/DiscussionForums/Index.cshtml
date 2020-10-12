@@ -35,7 +35,7 @@
     <p>Posted by <b>@Html.DisplayFor(modelItem => item.UserName)</b> on @Html.DisplayFor(modelItem => item.PostDate)</p>
     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
     <a asp-action="IncreaseLike" asp-route-id="@item.Id">Like(+)</a>
     <hr />
 }
