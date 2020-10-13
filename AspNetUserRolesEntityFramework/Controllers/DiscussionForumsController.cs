@@ -97,7 +97,7 @@ namespace AspNetUserRolesEntityFramework.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager")] //Wk10Lab7
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PostDate,UserName,TopicTitle,MessageContent")] DiscussionForum discussionForum)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PostDate,UserName,TopicTitle,MessageContent,Like")] DiscussionForum discussionForum)
         {
             if (id != discussionForum.Id)
             {
