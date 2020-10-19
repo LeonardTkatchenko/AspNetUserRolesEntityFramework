@@ -34,6 +34,15 @@ namespace AspNetUserRolesEntityFramework.Controllers
 
         public async Task<IActionResult> Privacy()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                foreach (var post in _context.DiscussionForum)
+                {
+                    post.canIncreaseLike = true;
+                }
+                await _context.SaveChangesAsync();
+            }
+
             var allDiscussions = from result in _context.DiscussionForum
                                  orderby result.PostDate descending
                                  select result;

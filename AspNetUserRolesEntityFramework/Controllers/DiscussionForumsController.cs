@@ -180,11 +180,16 @@ namespace AspNetUserRolesEntityFramework.Controllers
             {
                 try
                 {
-                    discussionForum.Like++;
-
-                    _context.Update(discussionForum);
-                    await _context.SaveChangesAsync();
+                    if (User.Identity.IsAuthenticated && 
+                            discussionForum.canIncreaseLike)
+                    {
+                        discussionForum.Like++;
+                        discussionForum.canIncreaseLike = false;
+                        _context.Update(discussionForum);
+                        await _context.SaveChangesAsync();
+                    }
                 }
+
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!DiscussionForumExists(discussionForum.Id))

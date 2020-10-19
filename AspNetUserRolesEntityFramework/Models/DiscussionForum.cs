@@ -26,5 +26,7 @@ namespace AspNetUserRolesEntityFramework.Models
         public string MessageContent { get; set; }
 
         public int Like { get; set; }
+
+        public bool canIncreaseLike { get; set; }
     }
 }
