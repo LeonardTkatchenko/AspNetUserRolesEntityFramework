@@ -7,15 +7,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AspNetUserRolesEntityFramework.Models;
 
+//Week 12 Tutorial
+using AspNetUserRolesEntityFramework.Data;
+using Microsoft.EntityFrameworkCore;
+
+
+
 namespace AspNetUserRolesEntityFramework.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;//Week 12 Tutorial
 
-        public HomeController(ILogger<HomeController> logger)
+        //Week 12 Tutorial
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -23,10 +32,11 @@ namespace AspNetUserRolesEntityFramework.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            return View(await _context.DiscussionForum.ToListAsync());
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
