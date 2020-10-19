@@ -34,7 +34,12 @@ namespace AspNetUserRolesEntityFramework.Controllers
 
         public async Task<IActionResult> Privacy()
         {
-            return View(await _context.DiscussionForum.ToListAsync());
+            var allDiscussions = from result in _context.DiscussionForum
+                                 orderby result.PostDate descending
+                                 select result;
+
+            return View(await allDiscussions.ToListAsync());
+            //return View(await _context.DiscussionForum.ToListAsync());
         }
 
 
