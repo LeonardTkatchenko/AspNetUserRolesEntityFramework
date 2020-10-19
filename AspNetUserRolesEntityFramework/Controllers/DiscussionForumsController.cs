@@ -205,6 +205,5 @@ namespace AspNetUserRolesEntityFramework.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-
     }
 }
