@@ -3,33 +3,40 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
-
 @model IEnumerable<AspNetUserRolesEntityFramework.Models.DiscussionForum>
-    
-Please <a href="~/Identity/Account/Login?returnUrl=~/Home/Privacy">login</a> or <a href="~/Identity/Account/Register?returnUrl=~/Home/Privacy">create an account</a> to post your discussion on this page
 
-    @foreach (var item in Model)
-    {
-        <h2>@Html.DisplayFor(modelItem => item.TopicTitle)</h2>
-        <p>
-            @{
-                for (int i = 0; i < item.Like; i++)
-                {
-                    <span style="color: #f8bd08; ">&#x2605;</span>
-                }
-                for (int i = 0; i < 5 - item.Like; i++)
-                {
-                    <span>&#x2606;</span>
-                }
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="/DiscussionForums/Create" class="btn btn-success"> Submit your review</a>
+}
+else
+{
+    <p>
+        Please <a href="~/Identity/Account/Login?returnUrl=~/Home/Privacy">login </a>or <a href="~/Identity/Account/Register?returnUrl=~/Home/Privacy">create an account </a>to post your discussion on this page
+    </p>
+}
+
+@foreach (var item in Model)
+{
+    <h2>@Html.DisplayFor(modelItem => item.TopicTitle)</h2>
+    <p>
+        @{
+            for (int i = 0; i < item.Like; i++)
+            {
+                <span style="color: #f8bd08; ">&#x2605;</span>
             }
-        </p>
-        <p>@Html.DisplayFor(modelItem => item.MessageContent)</p>
-        <p>Posted by <b>@Html.DisplayFor(modelItem => item.UserName)</b> on @Html.DisplayFor(modelItem => item.PostDate)</p>
-        <a asp-controller="DiscussionForums" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-        <a asp-controller="DiscussionForums" asp-action="Details" asp-route-id="@item.Id">Details</a>
-        <a asp-controller="DiscussionForums" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-        <a asp-controller="DiscussionForums" asp-action="IncreaseLike" asp-route-id="@item.Id">Like(+)</a>
-        <hr />
-    }
+            for (int i = 0; i < 5 - item.Like; i++)
+            {
+                <span>&#x2606;</span>
+            }
+        }
+    </p>
+    <p>@Html.DisplayFor(modelItem => item.MessageContent)</p>
+    <p>Posted by <b>@Html.DisplayFor(modelItem => item.UserName)</b> on @Html.DisplayFor(modelItem => item.PostDate)</p>
+    <a asp-controller="DiscussionForums" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+    <a asp-controller="DiscussionForums" asp-action="Details" asp-route-id="@item.Id">Details</a>
+    <a asp-controller="DiscussionForums" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+    <a asp-controller="DiscussionForums" asp-action="IncreaseLike" asp-route-id="@item.Id">Like(+)</a>
+    <hr />
+}
 
