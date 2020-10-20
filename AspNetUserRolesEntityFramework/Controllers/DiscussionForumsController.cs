@@ -201,9 +201,9 @@ namespace AspNetUserRolesEntityFramework.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Privacy", "Home");
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Privacy", "Home");
         }
     }
 }
